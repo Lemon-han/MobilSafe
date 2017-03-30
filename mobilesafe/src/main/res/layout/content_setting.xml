@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.emma.mobilesafe.acitivity.SettingActivity"
+    tools:showIn="@layout/activity_setting">
+
+
+    <com.emma.mobilesafe.view.SettingItemView
+        xmlns:mobilesafe="http://schemas.android.com/apk/res/com.emma.mobilesafe"
+        android:id="@+id/siv_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="启动更新关闭"
+        mobilesafe:deson="启动更新开启"
+        mobilesafe:destitle="启动更新设置"/>
+
+
+</LinearLayout>
