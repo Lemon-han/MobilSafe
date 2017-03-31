@@ -26,6 +26,11 @@
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".acitivity.TempActivity"
+            android:label="@string/title_activity_temp"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

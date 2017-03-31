@@ -39,4 +39,34 @@ public class SpUtils {
         }
         return sp.getBoolean(key, defValue);
     }
+
+
+    /**
+     * 写入布尔类型变量
+     *
+     * @param context
+     * @param key
+     * @param value
+     */
+    public static void putString(Context context, String key, String value) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        sp.edit().putString(key, value).commit();
+    }
+
+    /**
+     * 读取布尔类型变量
+     *
+     * @param context
+     * @param key
+     * @param defValue
+     * @return
+     */
+    public static String getString(Context context, String key, String defValue) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        return sp.getString(key, defValue);
+    }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mobilesafe="http://schemas.android.com/apk/res/com.emma.mobilesafe"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_setting"
     android:layout_width="match_parent"
@@ -15,13 +16,19 @@
 
 
     <com.emma.mobilesafe.view.SettingItemView
-        xmlns:mobilesafe="http://schemas.android.com/apk/res/com.emma.mobilesafe"
         android:id="@+id/siv_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        mobilesafe:desoff="启动更新关闭"
-        mobilesafe:deson="启动更新开启"
-        mobilesafe:destitle="启动更新设置"/>
+        android:layout_marginTop="50dp"
+        mobilesafe:desoff="自动更新设置关闭"
+        mobilesafe:deson="自动更新设置开启"
+        mobilesafe:destitle="自动更新设置"/>
 
+    <com.emma.mobilesafe.view.SettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="电话归属地查询关闭"
+        mobilesafe:deson="电话归属地查询开启"
+        mobilesafe:destitle="电话归属地查询"/>
 
 </LinearLayout>

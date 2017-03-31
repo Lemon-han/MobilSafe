@@ -15,6 +15,11 @@ import com.emma.mobilesafe.R;
 public class SettingItemView extends RelativeLayout {
     private Switch open;
 
+    public static String NAMESPACE = "http://schemas.android.com/apk/res/com.emma.mobilesafe";
+    private String mDestitle;
+    private String mDesoff;
+    private String mDeson;
+
     public SettingItemView(Context context) {
         this(context, null);
     }
@@ -29,12 +34,16 @@ public class SettingItemView extends RelativeLayout {
         View.inflate(context, R.layout.setting_item_view, this);
         open = (Switch) findViewById(R.id.settting_item_switch);
 
-
         initAttrs(attrs);
+
+        open.setText(mDestitle);
+
     }
 
     private void initAttrs(AttributeSet attrs) {
-
+        mDestitle = attrs.getAttributeValue(NAMESPACE, "destitle");
+        mDesoff = attrs.getAttributeValue(NAMESPACE, "desoff");
+        mDeson = attrs.getAttributeValue(NAMESPACE, "deson");
     }
 
 
@@ -45,9 +54,9 @@ public class SettingItemView extends RelativeLayout {
     public void setCheck(Boolean isCheck) {
         open.setChecked(isCheck);
         if (isCheck) {
-            open.setText("自动更新已开启");
+            open.setText(mDeson);
         } else {
-            open.setText("自动更新已关闭");
+            open.setText(mDesoff);
         }
     }
 }

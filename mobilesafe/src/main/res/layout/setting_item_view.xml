@@ -12,7 +12,6 @@
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="自动更新设置"
         android:textColor="@color/colorText"
         android:textSize="@dimen/text_normal_size"/>
 
