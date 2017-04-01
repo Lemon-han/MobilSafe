@@ -15,8 +15,9 @@ import android.widget.Toast;
 
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.adapter.MyHomeAdapter;
-import com.emma.mobilesafe.utils.ConstantVlaue;
-import com.emma.mobilesafe.utils.SpUtils;
+import com.emma.mobilesafe.utils.ConstantValue;
+import com.emma.mobilesafe.utils.Md5Util;
+import com.emma.mobilesafe.utils.SpUtil;
 import com.emma.mobilesafe.utils.ToastUtil;
 import com.emma.mobilesafe.view.RecyclerViewClickListener;
 
@@ -89,7 +90,7 @@ public class HomeAcitivity extends Activity {
     }
 
     private void showDialog() {
-        String psd = SpUtils.getString(this, ConstantVlaue.MOBILE_SAFE_PSD, "");
+        String psd = SpUtil.getString(this, ConstantValue.MOBILE_SAFE_PSD, "");
         if (TextUtils.isEmpty(psd)) {
             showSetPsdDialog();
         } else {
@@ -104,7 +105,8 @@ public class HomeAcitivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
         final View view = View.inflate(this, R.layout.dialog_confirm_psd, null);
-        dialog.setView(view);
+//        dialog.setView(view);
+        dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
 
         Button bt_submit = (Button) view.findViewById(R.id.bt_submit);
@@ -116,23 +118,23 @@ public class HomeAcitivity extends Activity {
 
                 String confirmedPsd = et_confirm_pwd.getText().toString();
 
-                if(!TextUtils.isEmpty(confirmedPsd)){
-                    String psd = SpUtils.getString(getApplicationContext(),ConstantVlaue.MOBILE_SAFE_PSD,"");
-                    //进入手机防盗模块
-                    if(psd.equals(confirmedPsd)){
-                        Intent intent = new Intent(getApplicationContext(), TempActivity.class);
+                if (!TextUtils.isEmpty(confirmedPsd)) {
+                    String psd = SpUtil.getString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, "");
+
+                    if (psd.equals(Md5Util.encoder(confirmedPsd))) {
+                        Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
                         startActivity(intent);
 
                         dialog.dismiss();
 
-                        SpUtils.putString(getApplicationContext(),ConstantVlaue.MOBILE_SAFE_PSD,psd);
+                        SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, psd);
 
-                    }else{
-                        ToastUtil.show(getApplicationContext(),"密码错误");
+                    } else {
+                        ToastUtil.show(getApplicationContext(), "密码错误");
                         et_confirm_pwd.setText("");
                     }
-                }else{
-                    ToastUtil.show(getApplicationContext(),"请输入秘密");
+                } else {
+                    ToastUtil.show(getApplicationContext(), "请输入秘密");
                 }
             }
         });
@@ -152,7 +154,7 @@ public class HomeAcitivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
         final View view = View.inflate(this, R.layout.dialog_set_psd, null);
-        dialog.setView(view);
+        dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
 
         Button bt_submit = (Button) view.findViewById(R.id.bt_submit);
@@ -166,23 +168,23 @@ public class HomeAcitivity extends Activity {
                 String psd = et_set_psd.getText().toString();
                 String confirmedPsd = et_confirm_pwd.getText().toString();
 
-                if(!TextUtils.isEmpty(psd)&&!TextUtils.isEmpty(confirmedPsd)){
+                if (!TextUtils.isEmpty(psd) && !TextUtils.isEmpty(confirmedPsd)) {
                     //进入手机防盗模块
-                    if(psd.equals(confirmedPsd)){
-                        Intent intent = new Intent(getApplicationContext(), TempActivity.class);
+                    if (psd.equals(confirmedPsd)) {
+                        Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
                         startActivity(intent);
 
                         dialog.dismiss();
 
-                        SpUtils.putString(getApplicationContext(),ConstantVlaue.MOBILE_SAFE_PSD,psd);
+                        SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, Md5Util.encoder(psd));
 
-                    }else{
-                        ToastUtil.show(getApplicationContext(),"两次密码输入不一致");
+                    } else {
+                        ToastUtil.show(getApplicationContext(), "两次密码输入不一致");
                         et_set_psd.setText("");
                         et_confirm_pwd.setText("");
                     }
-                }else{
-                    ToastUtil.show(getApplicationContext(),"请输入秘密");
+                } else {
+                    ToastUtil.show(getApplicationContext(), "请输入秘密");
                 }
             }
         });
@@ -199,8 +201,6 @@ public class HomeAcitivity extends Activity {
         rv_home = (RecyclerView) findViewById(R.id.rv_home);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         rv_home.setLayoutManager(layoutManager);
-
-
     }
 
 

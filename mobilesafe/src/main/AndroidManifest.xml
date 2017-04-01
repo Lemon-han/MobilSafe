@@ -6,6 +6,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
@@ -27,9 +29,15 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".acitivity.TempActivity"
-            android:label="@string/title_activity_temp"
+            android:name=".acitivity.SetupOverActivity"
+            android:label="@string/title_activity_setup_over"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".acitivity.Setup1Activity"/>
+        <activity android:name=".acitivity.Setup2Activity"/>
+        <activity android:name=".acitivity.Setup3Activity"/>
+        <activity android:name=".acitivity.Setup4Activity"/>
+        <activity android:name=".acitivity.ContactListActivity">
         </activity>
     </application>
 

@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.emma.mobilesafe.R;
-import com.emma.mobilesafe.utils.ConstantVlaue;
-import com.emma.mobilesafe.utils.SpUtils;
+import com.emma.mobilesafe.utils.ConstantValue;
+import com.emma.mobilesafe.utils.SpUtil;
 import com.emma.mobilesafe.view.SettingItemView;
 
 public class SettingActivity extends AppCompatActivity {
@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity {
     private void initUpdate() {
         final SettingItemView siv_update = (SettingItemView) findViewById(R.id.siv_update);
         //获取之前的状态
-        Boolean open_update = SpUtils.getBoolean(this, ConstantVlaue.OPEN_UPDATE, false);
+        Boolean open_update = SpUtil.getBoolean(this, ConstantValue.OPEN_UPDATE, false);
         siv_update.setCheck(open_update);
 
         siv_update.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 siv_update.setCheck(!isCheck);
 
-                SpUtils.putBoolean(getApplicationContext(), ConstantVlaue.OPEN_UPDATE, !isCheck);
+                SpUtil.putBoolean(getApplicationContext(), ConstantValue.OPEN_UPDATE, !isCheck);
             }
         });
     }

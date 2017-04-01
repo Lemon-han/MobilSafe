@@ -17,8 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.emma.mobilesafe.R;
-import com.emma.mobilesafe.utils.ConstantVlaue;
-import com.emma.mobilesafe.utils.SpUtils;
+import com.emma.mobilesafe.utils.ConstantValue;
+import com.emma.mobilesafe.utils.SpUtil;
 import com.emma.mobilesafe.utils.StringUtil;
 import com.emma.mobilesafe.utils.ToastUtil;
 import com.lidroid.xutils.HttpUtils;
@@ -211,7 +211,7 @@ public class SplashActivity extends AppCompatActivity {
         tv_version_name.setText("版本名称" + getVersionName());
         mLocalVersionCode = getVersionCode();
 
-        if (SpUtils.getBoolean(this, ConstantVlaue.OPEN_UPDATE, false)) {
+        if (SpUtil.getBoolean(this, ConstantValue.OPEN_UPDATE, false)) {
             checkVersion();
         } else {
             mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
