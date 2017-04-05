@@ -4,6 +4,11 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
 
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+
     defaultConfig {
         applicationId "com.emma.mobilesafe"
         minSdkVersion 19

@@ -25,10 +25,21 @@
         mobilesafe:destitle="自动更新设置"/>
 
     <com.emma.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         mobilesafe:desoff="电话归属地查询关闭"
         mobilesafe:deson="电话归属地查询开启"
         mobilesafe:destitle="电话归属地查询"/>
+
+    <com.emma.mobilesafe.view.SettingClickView
+        android:id="@+id/scv_toast_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.emma.mobilesafe.view.SettingClickView
+        android:id="@+id/scv_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

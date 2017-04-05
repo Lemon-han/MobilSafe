@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_atool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.emma.mobilesafe.acitivity.AToolActivity">
+
+    <TextView
+        style="@style/titleStyle"
+        android:text="高级工具"/>
+
+    <TextView
+        android:id="@+id/tv_query_phone_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_report_problem_yellow_300_24dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="归属地查询"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_report_problem_yellow_300_24dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="归属地查询"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_report_problem_yellow_300_24dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="归属地查询"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_report_problem_yellow_300_24dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="归属地查询"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
+</LinearLayout>

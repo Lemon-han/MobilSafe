@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -109,6 +110,50 @@ public class SplashActivity extends AppCompatActivity {
         initData();
 
         initAnimation();
+
+        initDB();
+
+    }
+
+    private void initDB() {
+        initAddressDB("address.db");
+    }
+
+    /**
+     * 读取数据库files文件夹下
+     *
+     * @param dbName
+     */
+    private void initAddressDB(String dbName) {
+        File files = getFilesDir();
+        File file = new File(files, dbName);
+        if (file.exists()) {
+            return;
+        }
+        InputStream stream = null;
+        FileOutputStream fos = null;
+
+        try {
+            stream = getAssets().open(dbName);
+            fos = new FileOutputStream(file);
+
+            byte[] bs = new byte[1024];
+            int tmp = -1;
+            while ((tmp = stream.read(bs)) != -1) {
+                fos.write(bs, 0, tmp);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null && fos != null) {
+                try {
+                    stream.close();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void initAnimation() {

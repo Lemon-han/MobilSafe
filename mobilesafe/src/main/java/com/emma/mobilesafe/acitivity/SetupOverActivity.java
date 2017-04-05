@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.utils.ConstantValue;
@@ -21,8 +23,8 @@ public class SetupOverActivity extends AppCompatActivity {
             //停留在设置完成界面
             setContentView(R.layout.activity_setup_over);
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+
+            initUI();
 
 
         } else {
@@ -32,6 +34,27 @@ public class SetupOverActivity extends AppCompatActivity {
             finish();
         }
 
+
+    }
+
+    private void initUI() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TextView tv_phone = (TextView) findViewById(R.id.tv_phone);
+        tv_phone.setText(SpUtil.getString(this, ConstantValue.CONTACT_PHONE, ""));
+
+
+        TextView tv_reset_setup = (TextView) findViewById(R.id.tv_reset_setup);
+        tv_reset_setup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
 
     }
 

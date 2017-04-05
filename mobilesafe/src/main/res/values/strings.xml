@@ -78,4 +78,7 @@
     <string name="title_activity_setup2">Setup2Activity</string>
     <string name="title_activity_setup3">Setup3Activity</string>
     <string name="title_activity_setup4">Setup4Activity</string>
+
+    <string name="sample_device_admin">超级管理员</string>
+    <string name="sample_device_admin_description">一键激活，一键锁屏，一键清除数据，一键卸载</string>
 </resources>

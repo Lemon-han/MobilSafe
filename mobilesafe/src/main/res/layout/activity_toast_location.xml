@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_toast_location"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#accc"
+    tools:context="com.emma.mobilesafe.acitivity.ToastLocationActivity">
+
+    <ImageView
+        android:id="@+id/iv_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_fingerprint_pink_400_48dp"/>
+
+    <Button
+        android:id="@+id/bt_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E88E5"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="按住提示框拖拽到任意位置"
+        android:textColor="@android:color/white"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/bt_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#1E88E5"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="按住提示框拖拽到任意位置"
+        android:textColor="@android:color/white"
+        android:visibility="visible"/>
+</RelativeLayout>
