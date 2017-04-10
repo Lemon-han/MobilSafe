@@ -1,17 +1,24 @@
 package com.emma.mobilesafe.acitivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.service.AddressService;
+import com.emma.mobilesafe.service.BlackNumberService;
 import com.emma.mobilesafe.utils.ConstantValue;
 import com.emma.mobilesafe.utils.ServiceUtil;
 import com.emma.mobilesafe.utils.SpUtil;
+import com.emma.mobilesafe.utils.ToastUtil;
 import com.emma.mobilesafe.view.SettingClickView;
 import com.emma.mobilesafe.view.SettingItemView;
 
@@ -32,6 +39,51 @@ public class SettingActivity extends Activity {
         initAddress();
         initToastStyle();
         initLocation();
+        //6.0以上需要进行权限处理
+        if (ContextCompat.checkSelfPermission(SettingActivity.this, Manifest.permission.CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SettingActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            initBlacknumber();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initBlacknumber();
+                } else {
+                    ToastUtil.show(this, "You denied the permission");
+                }
+                break;
+            default:
+        }
+    }
+
+    private void initBlacknumber() {
+
+        final SettingItemView siv_blacknumber = (SettingItemView) findViewById(R.id.siv_blacknumber);
+        boolean isRunning = ServiceUtil.isRunning(this, "com.emma.mobilesafe.service.BlackNumberService");
+        siv_blacknumber.setCheck(isRunning);
+
+        siv_blacknumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCheck = siv_blacknumber.isCheck();
+                siv_blacknumber.setCheck(!isCheck);
+
+                if (!isCheck) {
+                    //开启服务
+                    startService(new Intent(getApplicationContext(), BlackNumberService.class));
+                } else {
+                    //关闭服务
+                    stopService(new Intent(getApplicationContext(), BlackNumberService.class));
+
+                }
+            }
+        });
     }
 
     /**
@@ -54,7 +106,7 @@ public class SettingActivity extends Activity {
         //话述(产品)
         scv_toast_style.setTitle("设置归属地显示风格");
         //1,创建描述文字所在的string类型数组
-        mToastStyleDes = new String[]{"透明","橙色","蓝色","灰色","绿色"};
+        mToastStyleDes = new String[]{"透明", "橙色", "蓝色", "灰色", "绿色"};
         //2,SP获取吐司显示样式的索引值(int),用于获取描述文字
 
         mToastStyle = SpUtil.getInt(this, ConstantValue.TOAST_STYLE, 0);
@@ -79,8 +131,8 @@ public class SettingActivity extends Activity {
         builder.setIcon(R.drawable.ic_star_half_pink_400_24dp);
         builder.setTitle("请选择归属地样式");
         //选择单个条目事件监听
-		/*
-		 * 1:string类型的数组描述颜色文字数组
+        /*
+         * 1:string类型的数组描述颜色文字数组
 		 * 2:弹出对画框的时候的选中条目索引值
 		 * 3:点击某一个条目后触发的点击事件
 		 * */
@@ -119,12 +171,12 @@ public class SettingActivity extends Activity {
                 //返回点击前的选中状态
                 boolean isCheck = siv_address.isCheck();
                 siv_address.setCheck(!isCheck);
-                if(!isCheck){
+                if (!isCheck) {
                     //开启服务,管理吐司
-                    startService(new Intent(getApplicationContext(),AddressService.class));
-                }else{
+                    startService(new Intent(getApplicationContext(), AddressService.class));
+                } else {
                     //关闭服务,不需要显示吐司
-                    stopService(new Intent(getApplicationContext(),AddressService.class));
+                    stopService(new Intent(getApplicationContext(), AddressService.class));
                 }
             }
         });
@@ -152,7 +204,7 @@ public class SettingActivity extends Activity {
                 //将原有状态取反,等同上诉的两部操作
                 siv_update.setCheck(!isCheck);
                 //将取反后的状态存储到相应sp中
-                SpUtil.putBoolean(getApplicationContext(), ConstantValue.OPEN_UPDATE,!isCheck);
+                SpUtil.putBoolean(getApplicationContext(), ConstantValue.OPEN_UPDATE, !isCheck);
             }
         });
     }

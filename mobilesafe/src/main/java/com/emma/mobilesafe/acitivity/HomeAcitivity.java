@@ -61,6 +61,7 @@ public class HomeAcitivity extends Activity {
                                 showDialog();
                                 break;
                             case 1:
+                                startActivity(new Intent(getApplicationContext(),BlackActivity.class));
                                 break;
                             case 2:
                                 break;

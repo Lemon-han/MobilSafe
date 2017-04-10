@@ -42,4 +42,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.emma.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_blacknumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="黑名单拦截关闭"
+        mobilesafe:deson="黑名单拦截开启"
+        mobilesafe:destitle="黑名单拦截设置"/>
+
 </LinearLayout>

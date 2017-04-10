@@ -81,4 +81,5 @@
 
     <string name="sample_device_admin">超级管理员</string>
     <string name="sample_device_admin_description">一键激活，一键锁屏，一键清除数据，一键卸载</string>
+    <string name="title_activity_black">BlackActivity</string>
 </resources>
