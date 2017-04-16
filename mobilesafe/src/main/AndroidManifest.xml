@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
     <application
         android:allowBackup="true"
@@ -98,6 +99,11 @@
         <activity
             android:name=".acitivity.AppManagerActivity"
             android:label="@string/title_activity_app_manager"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".acitivity.ProcessManagerActivity"
+            android:label="@string/title_activity_process_manager"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

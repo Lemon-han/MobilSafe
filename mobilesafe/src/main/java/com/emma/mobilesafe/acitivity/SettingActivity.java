@@ -1,7 +1,6 @@
 package com.emma.mobilesafe.acitivity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.emma.mobilesafe.R;
@@ -25,7 +25,7 @@ import com.emma.mobilesafe.view.SettingItemView;
 /**
  *
  */
-public class SettingActivity extends Activity {
+public class SettingActivity extends AppCompatActivity {
     private String[] mToastStyleDes;
     private int mToastStyle;
     private SettingClickView scv_toast_style;
@@ -34,6 +34,10 @@ public class SettingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setTitle("设置中心");
+//        setSupportActionBar(toolbar);
 
         initUpdate();
         initAddress();

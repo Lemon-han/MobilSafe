@@ -73,7 +73,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="title_activity_setup_over">SetupOverActivity</string>
+    <string name="title_activity_setup_over">设置中心</string>
     <string name="title_activity_setup1">Setup1Activity</string>
     <string name="title_activity_setup2">Setup2Activity</string>
     <string name="title_activity_setup3">Setup3Activity</string>
@@ -81,6 +81,7 @@
 
     <string name="sample_device_admin">超级管理员</string>
     <string name="sample_device_admin_description">一键激活，一键锁屏，一键清除数据，一键卸载</string>
-    <string name="title_activity_black">BlackActivity</string>
-    <string name="title_activity_app_manager">AppManagerActivity</string>
+    <string name="title_activity_black">黑名单</string>
+    <string name="title_activity_app_manager">软件管理</string>
+    <string name="title_activity_process_manager">进程管理</string>
 </resources>
