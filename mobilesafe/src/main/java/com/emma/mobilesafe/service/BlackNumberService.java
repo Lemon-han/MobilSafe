@@ -19,6 +19,9 @@ import com.emma.mobilesafe.db.dao.BlackNumberDao;
 
 import java.lang.reflect.Method;
 
+/**
+ *
+ */
 public class BlackNumberService extends Service {
 
     private InnerSmsReceiver mInnerSmsReceiver;
@@ -30,7 +33,6 @@ public class BlackNumberService extends Service {
     @Override
     public void onCreate() {
         mDao = BlackNumberDao.getInstance(getApplicationContext());
-
 
         //拦截短信
         IntentFilter intentFilter = new IntentFilter();

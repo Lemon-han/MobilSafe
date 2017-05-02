@@ -84,4 +84,11 @@
     <string name="title_activity_black">黑名单</string>
     <string name="title_activity_app_manager">软件管理</string>
     <string name="title_activity_process_manager">进程管理</string>
+    <string name="title_activity_process_setting">ProcessSettingActivity</string>
+    <string name="title_activity_common_number_query">CommonNumberQueryActivity</string>
+    <string name="title_activity_enter_psd">EnterPsdActivity</string>
+    <string name="title_activity_anti_virus">AntiVirusActivity</string>
+    <string name="title_activity_cahe_clear">CaheClearActivity</string>
+    <string name="title_activity_sdcache_clear">SDCacheClearActivity</string>
+    <string name="title_activity_traffic_acitivity">TrafficAcitivity</string>
 </resources>

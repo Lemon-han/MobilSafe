@@ -16,7 +16,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:padding="5dp"
         android:singleLine="true"
-        android:text="6666666666666555555555555555555555555555555555666666666666666666"
+        android:text="啊啊~五环，你比四环多一环~啊啊啊~五环，你比六环少一环~终于有一天~你会修到七环~修到七环怎么办~你比五环多两环……"
         android:textColor="#595959"
         android:textSize="14sp"/>
 

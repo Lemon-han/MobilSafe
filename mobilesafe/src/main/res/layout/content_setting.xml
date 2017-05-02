@@ -50,4 +50,12 @@
         mobilesafe:deson="黑名单拦截开启"
         mobilesafe:destitle="黑名单拦截设置"/>
 
+    <com.emma.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_app_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="程序锁关闭"
+        mobilesafe:deson="程序锁开启"
+        mobilesafe:destitle="程序锁设置"/>
+
 </LinearLayout>

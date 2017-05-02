@@ -19,7 +19,7 @@
         android:background="@drawable/selector_atool_item_bg"
         android:drawableLeft="@drawable/ic_search_pink_400_24dp"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="归属地查询"
         android:textColor="@color/colorText"
         android:textSize="@dimen/text_normal_size"/>
@@ -31,10 +31,34 @@
         android:background="@drawable/selector_atool_item_bg"
         android:drawableLeft="@drawable/ic_message_pink_400_24dp"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="短信备份"
         android:textColor="@color/colorText"
         android:textSize="@dimen/text_normal_size"/>
 
+
+    <TextView
+        android:id="@+id/tv_commonnumber_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_message_pink_400_24dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="常用号码查询"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
+
+    <TextView
+        android:id="@+id/tv_app_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_atool_item_bg"
+        android:drawableLeft="@drawable/ic_lock_outline_pink_300_24dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="应用锁"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_normal_size"/>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.emma.mobilesafe.acitivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.db.domain.ProcessInfo;
 import com.emma.mobilesafe.engine.ProcessInfoProvider;
+import com.emma.mobilesafe.utils.ConstantValue;
+import com.emma.mobilesafe.utils.SpUtil;
 import com.emma.mobilesafe.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -74,7 +77,10 @@ public class ProcessManagerActivity extends AppCompatActivity implements View.On
         //listView中添加两个描述条目
         @Override
         public int getCount() {
-            return mCustomerList.size() + mSystemList.size() + 2;
+            if (!SpUtil.getBoolean(getApplicationContext(), ConstantValue.SHOW_SYSTEM, false))
+                return mCustomerList.size() + mSystemList.size() + 2;
+            else
+                return mCustomerList.size() + 1;
         }
 
         @Override
@@ -301,9 +307,23 @@ public class ProcessManagerActivity extends AppCompatActivity implements View.On
                 clearAll();
                 break;
             case R.id.bt_setting:
-
+                setting();
                 break;
         }
+    }
+
+    private void setting() {
+        Intent intent = new Intent(this, ProcessSettingActivity.class);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //通知数据适配器刷新
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

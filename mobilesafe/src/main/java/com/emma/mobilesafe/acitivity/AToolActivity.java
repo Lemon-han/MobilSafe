@@ -16,6 +16,9 @@ import java.io.File;
 public class AToolActivity extends AppCompatActivity {
     private TextView tv_query_phone_address;
     private TextView tv_sms_backup;
+    private TextView tv_commonnumber_query;
+    private TextView tv_app_lock;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,33 @@ public class AToolActivity extends AppCompatActivity {
         setContentView(R.layout.activity_atool);
 
         initPhoneAddress();
+
         initSmsBackUpt();
+
+        initCommonNumberQuery();
+
+        initAppLock();
+
+    }
+
+    private void initAppLock() {
+        tv_app_lock = (TextView) findViewById(R.id.tv_app_lock);
+        tv_app_lock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AppLockActivity.class));
+            }
+        });
+    }
+
+    private void initCommonNumberQuery() {
+        tv_commonnumber_query = (TextView) findViewById(R.id.tv_commonnumber_query);
+        tv_commonnumber_query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),CommonNumberQueryActivity.class));
+            }
+        });
     }
 
     private void initSmsBackUpt() {

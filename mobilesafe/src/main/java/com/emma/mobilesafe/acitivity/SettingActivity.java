@@ -15,6 +15,7 @@ import android.view.View;
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.service.AddressService;
 import com.emma.mobilesafe.service.BlackNumberService;
+import com.emma.mobilesafe.service.WatchDogService;
 import com.emma.mobilesafe.utils.ConstantValue;
 import com.emma.mobilesafe.utils.ServiceUtil;
 import com.emma.mobilesafe.utils.SpUtil;
@@ -22,9 +23,7 @@ import com.emma.mobilesafe.utils.ToastUtil;
 import com.emma.mobilesafe.view.SettingClickView;
 import com.emma.mobilesafe.view.SettingItemView;
 
-/**
- *
- */
+
 public class SettingActivity extends AppCompatActivity {
     private String[] mToastStyleDes;
     private int mToastStyle;
@@ -43,6 +42,8 @@ public class SettingActivity extends AppCompatActivity {
         initAddress();
         initToastStyle();
         initLocation();
+        initAppLock();
+
         //6.0以上需要进行权限处理
         if (ContextCompat.checkSelfPermission(SettingActivity.this, Manifest.permission.CALL_PHONE) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -50,6 +51,27 @@ public class SettingActivity extends AppCompatActivity {
         } else {
             initBlacknumber();
         }
+    }
+
+    private void initAppLock() {
+        final SettingItemView siv_app_lock = (SettingItemView) findViewById(R.id.siv_app_lock);
+        boolean isRunning = ServiceUtil.isRunning(this, "com.emma.mobilesafe.service.WatchDogService");
+        siv_app_lock.setCheck(isRunning);
+
+        siv_app_lock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCheck = siv_app_lock.isCheck();
+                siv_app_lock.setCheck(!isCheck);
+                if (!isCheck) {
+                    //开启服务
+                    startService(new Intent(getApplicationContext(), WatchDogService.class));
+                } else {
+                    //关闭服务
+                    stopService(new Intent(getApplicationContext(), WatchDogService.class));
+                }
+            }
+        });
     }
 
     @Override

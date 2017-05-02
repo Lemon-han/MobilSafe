@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     <TextView 
         style="@style/titleStyle"
-        android:background="#fcc"
+        android:background="@color/colorAccent"
         android:text="添加黑名单号码"/>
 	<EditText 
 	    android:id="@+id/et_phone"

@@ -2,7 +2,6 @@
 <!-- -100%p 负一屏幕的宽度大小值 -->
 <translate
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
     android:fromXDelta="-100%p"
-    android:toXDelta="0"
-    android:duration="500">
-</translate>
+    android:toXDelta="0"/>

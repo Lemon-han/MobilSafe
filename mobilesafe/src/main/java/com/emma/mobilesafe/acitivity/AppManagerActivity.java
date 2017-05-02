@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StatFs;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Formatter;
@@ -56,8 +54,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                 tv_des.setText("用户应用(" + mCustomerList.size() + ")");
             }
         }
-
-        ;
     };
     private AppInfo mAppInfo;
     private PopupWindow mPopupWindow;
@@ -70,25 +66,13 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         toolbar.setTitle("软件管理");
         setSupportActionBar(toolbar);
 
-
         initTitle();
         initList();
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private void initList() {
         lv_app_list = (ListView) findViewById(R.id.lv_app_list);
         tv_des = (TextView) findViewById(R.id.tv_des);
-
 
         lv_app_list.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -160,13 +144,11 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         animationSet.addAnimation(alphaAnimation);
         animationSet.addAnimation(scaleAnimation);
 
-
         mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 true);
         mPopupWindow.setBackgroundDrawable(new ColorDrawable());
-
-        mPopupWindow.showAsDropDown(view, 150, -view.getHeight());
+        mPopupWindow.showAsDropDown(view, 200, -view.getHeight());
 
         popupView.startAnimation(animationSet);
     }
@@ -178,6 +160,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void getData() {
+
         new Thread() {
             public void run() {
                 mAppInfoList = AppInfoProvider.getAppInfoList(getApplicationContext());

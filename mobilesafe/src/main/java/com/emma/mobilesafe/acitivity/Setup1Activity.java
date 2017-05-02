@@ -7,17 +7,14 @@ import com.emma.mobilesafe.R;
 
 public class Setup1Activity extends BaseSetUpAppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup1);
     }
 
-
     @Override
     protected void showPrePage() {
-
     }
 
     @Override

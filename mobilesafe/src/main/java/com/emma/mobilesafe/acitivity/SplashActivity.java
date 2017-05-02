@@ -105,18 +105,43 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-
         initUI();
+
         initData();
 
         initAnimation();
 
         initDB();
 
+        if (!SpUtil.getBoolean(this, ConstantValue.HAS_SHORTCUT, false)) {
+            //生成快捷方式
+            initShortCut();
+        }
+
+    }
+
+    /**
+     * 生成快捷方式
+     */
+    private void initShortCut() {
+        Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, android.graphics.BitmapFactory.decodeResource(getResources(), R.mipmap.icon));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "啊哈哈");
+
+        Intent shortCutIntent = new Intent("com.emma.mobilesafe.HOME");
+        shortCutIntent.addCategory("android.intent.category.DEFAULT");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortCutIntent);
+
+        sendBroadcast(intent);
+
+        SpUtil.putBoolean(this, ConstantValue.HAS_SHORTCUT, true);
     }
 
     private void initDB() {
         initAddressDB("address.db");
+        initAddressDB("commonnum.db");
+        initAddressDB("antivirus.db");
     }
 
     /**
@@ -167,7 +192,7 @@ public class SplashActivity extends AppCompatActivity {
      */
     protected void showUpdateDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setIcon(R.mipmap.icon);
         builder.setTitle("版本更新");
         builder.setMessage(mVersionDes);
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
@@ -259,7 +284,7 @@ public class SplashActivity extends AppCompatActivity {
         if (SpUtil.getBoolean(this, ConstantValue.OPEN_UPDATE, false)) {
             checkVersion();
         } else {
-            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 3000);
         }
 
     }

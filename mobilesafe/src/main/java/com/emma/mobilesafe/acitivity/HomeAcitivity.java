@@ -42,11 +42,11 @@ public class HomeAcitivity extends Activity {
 
     private void initData() {
         mTitleStr = new String[]{"手机防盗", "通信卫士", "软件管理", "进程管理", "流量统计", "手机杀毒", "缓存清理", "高级工具", "设置中心"};
-        mDrawableIds = new int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,};
+        mDrawableIds = new int[]{R.drawable.home_lock, R.drawable.home_call,
+                R.drawable.home_manage, R.drawable.home_process,
+                R.drawable.home_flow, R.drawable.home_anti,
+                R.drawable.home_clear, R.drawable.home_gaoji,
+                R.drawable.home_setting,};
 
         mAdapter = new MyHomeAdapter(mDrawableIds, mTitleStr);
 
@@ -61,22 +61,25 @@ public class HomeAcitivity extends Activity {
                                 showDialog();
                                 break;
                             case 1:
-                                startActivity(new Intent(getApplicationContext(),BlackActivity.class));
+                                startActivity(new Intent(getApplicationContext(), BlackActivity.class));
                                 break;
                             case 2:
-                                startActivity(new Intent(getApplicationContext(),AppManagerActivity.class));
+                                startActivity(new Intent(getApplicationContext(), AppManagerActivity.class));
                                 break;
                             case 3:
-                                startActivity(new Intent(getApplicationContext(),ProcessManagerActivity.class));
+                                startActivity(new Intent(getApplicationContext(), ProcessManagerActivity.class));
                                 break;
                             case 4:
+                                startActivity(new Intent(getApplicationContext(), TrafficAcitivity.class));
                                 break;
                             case 5:
+                                startActivity(new Intent(getApplicationContext(), AntiVirusActivity.class));
                                 break;
                             case 6:
+                                startActivity(new Intent(getApplicationContext(), BaseCacheClearActivity.class));
                                 break;
                             case 7:
-                                startActivity(new Intent(getApplicationContext(),AToolActivity.class));
+                                startActivity(new Intent(getApplicationContext(), AToolActivity.class));
                                 break;
                             case 8:
                                 Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
@@ -109,7 +112,6 @@ public class HomeAcitivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
         final View view = View.inflate(this, R.layout.dialog_confirm_psd, null);
-//        dialog.setView(view);
         dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
 
@@ -118,8 +120,6 @@ public class HomeAcitivity extends Activity {
             @Override
             public void onClick(View v) {
                 EditText et_confirm_pwd = (EditText) view.findViewById(R.id.et_confirm_pwd);
-
-
                 String confirmedPsd = et_confirm_pwd.getText().toString();
 
                 if (!TextUtils.isEmpty(confirmedPsd)) {
