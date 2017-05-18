@@ -1,6 +1,7 @@
 package com.emma.mobilesafe.acitivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,11 +11,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.emma.mobilesafe.R;
 import com.emma.mobilesafe.service.AddressService;
 import com.emma.mobilesafe.service.BlackNumberService;
+import com.emma.mobilesafe.service.CameraLiveWallpaper;
 import com.emma.mobilesafe.service.WatchDogService;
 import com.emma.mobilesafe.utils.ConstantValue;
 import com.emma.mobilesafe.utils.ServiceUtil;
@@ -23,34 +26,56 @@ import com.emma.mobilesafe.utils.ToastUtil;
 import com.emma.mobilesafe.view.SettingClickView;
 import com.emma.mobilesafe.view.SettingItemView;
 
+import static com.emma.mobilesafe.utils.ConstantValue.OPEN_WALL_PAPER;
+
 
 public class SettingActivity extends AppCompatActivity {
     private String[] mToastStyleDes;
     private int mToastStyle;
     private SettingClickView scv_toast_style;
 
+    private static final int PERMISSIONS_REQUEST_CAMERA = 454;
+    private static final int PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private Context mContext;
+    static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
+    static final String PERMISSION_CALL_PHONE = Manifest.permission.CALL_PHONE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setTitle("设置中心");
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("设置中心");
+        setSupportActionBar(toolbar);
+
+        mContext = this;
+        checkSelfPermission();
 
         initUpdate();
         initAddress();
         initToastStyle();
         initLocation();
         initAppLock();
+        initWallPaper();
 
-        //6.0以上需要进行权限处理
-        if (ContextCompat.checkSelfPermission(SettingActivity.this, Manifest.permission.CALL_PHONE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(SettingActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
-        } else {
-            initBlacknumber();
-        }
+    }
+
+    private void initWallPaper() {
+        final SettingItemView siv_app_wall_paper = (SettingItemView) findViewById(R.id.siv_app_wall_paper);
+        boolean open_wall_paper = SpUtil.getBoolean(this, OPEN_WALL_PAPER, false);
+        siv_app_wall_paper.setCheck(open_wall_paper);
+
+        siv_app_wall_paper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean isCheck = siv_app_wall_paper.isCheck();
+                siv_app_wall_paper.setCheck(!isCheck);
+                checkSelfCameraPermission();
+                SpUtil.putBoolean(getApplicationContext(), ConstantValue.OPEN_WALL_PAPER, !isCheck);
+            }
+        });
     }
 
     private void initAppLock() {
@@ -74,18 +99,21 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    initBlacknumber();
-                } else {
-                    ToastUtil.show(this, "You denied the permission");
-                }
-                break;
-            default:
-        }
+
+    /**
+     * 选择壁纸
+     */
+    void startWallpaper() {
+        final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
+        Intent chooser = Intent.createChooser(pickWallpaper, getString(R.string.choose_wallpaper));
+        startActivity(chooser);
+    }
+
+    /**
+     * 不需要手动启动服务
+     */
+    void setTransparentWallpaper() {
+        startService(new Intent(mContext, CameraLiveWallpaper.class));
     }
 
     private void initBlacknumber() {
@@ -106,7 +134,6 @@ public class SettingActivity extends AppCompatActivity {
                 } else {
                     //关闭服务
                     stopService(new Intent(getApplicationContext(), BlackNumberService.class));
-
                 }
             }
         });
@@ -222,8 +249,6 @@ public class SettingActivity extends AppCompatActivity {
         siv_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //如果之前是选中的,点击过后,变成未选中
-                //如果之前是未选中的,点击过后,变成选中
 
                 //获取之前的选中状态
                 boolean isCheck = siv_update.isCheck();
@@ -233,6 +258,60 @@ public class SettingActivity extends AppCompatActivity {
                 SpUtil.putBoolean(getApplicationContext(), ConstantValue.OPEN_UPDATE, !isCheck);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initBlacknumber();
+                } else {
+                    ToastUtil.show(this, "You denied the permission");
+                }
+                break;
+            case PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    setTransparentWallpaper();
+                    startWallpaper();
+                } else {
+                    ToastUtil.show(this, getString(R.string._lease_open_permissions));
+                }
+                return;
+            }
+            default:
+        }
+    }
+
+    /**
+     * 检查动态壁纸权限
+     */
+    void checkSelfCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(mContext, PERMISSION_CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{PERMISSION_CAMERA},
+                    PERMISSIONS_REQUEST_CAMERA);
+        } else {
+//            setTransparentWallpaper();
+            startWallpaper();
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    void checkSelfPermission() {
+        if (ContextCompat.checkSelfPermission(mContext, PERMISSION_CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    PERMISSIONS_REQUEST_CALL_PHONE);
+        } else {
+            initBlacknumber();
+        }
     }
 
 }

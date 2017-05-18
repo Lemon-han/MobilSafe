@@ -58,4 +58,12 @@
         mobilesafe:deson="程序锁开启"
         mobilesafe:destitle="程序锁设置"/>
 
+    <com.emma.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_app_wall_paper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="透明壁纸关闭"
+        mobilesafe:deson="透明壁纸开启"
+        mobilesafe:destitle="透明壁纸设置"/>
+
 </LinearLayout>

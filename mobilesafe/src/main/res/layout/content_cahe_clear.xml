@@ -16,6 +16,7 @@
     tools:showIn="@layout/activity_cahe_clear">
 
     <ProgressBar
+        android:id="@+id/pb_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/mobilesafe" />
+            <option value="$PROJECT_DIR$/myapplication" />
             <option value="$PROJECT_DIR$/rocketman" />
+            <option value="$PROJECT_DIR$/toumingapp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

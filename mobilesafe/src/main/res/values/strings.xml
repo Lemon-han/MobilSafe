@@ -91,4 +91,6 @@
     <string name="title_activity_cahe_clear">CaheClearActivity</string>
     <string name="title_activity_sdcache_clear">SDCacheClearActivity</string>
     <string name="title_activity_traffic_acitivity">TrafficAcitivity</string>
+    <string name="_lease_open_permissions">lease_open_permissions</string>
+    <string name="choose_wallpaper">choose_wallpaper</string>
 </resources>

@@ -24,8 +24,6 @@ public class ToastLocationActivity extends Activity {
     private int mScreenWidth;
     private long[] mHits = new long[2];
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,14 +70,14 @@ public class ToastLocationActivity extends Activity {
         iv_drag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
-                mHits[mHits.length-1] = SystemClock.uptimeMillis();
-                if(mHits[mHits.length-1]-mHits[0]<500){
+                System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+                mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+                if (mHits[mHits.length - 1] - mHits[0] < 500) {
                     //满足双击事件后,调用代码
-                    int left = mScreenWidth/2 - iv_drag.getWidth()/2;
-                    int top = mScreenHeight/2 - iv_drag.getHeight()/2;
-                    int right = mScreenWidth/2+iv_drag.getWidth()/2;
-                    int bottom = mScreenHeight/2+iv_drag.getHeight()/2;
+                    int left = mScreenWidth / 2 - iv_drag.getWidth() / 2;
+                    int top = mScreenHeight / 2 - iv_drag.getHeight() / 2;
+                    int right = mScreenWidth / 2 + iv_drag.getWidth() / 2;
+                    int bottom = mScreenHeight / 2 + iv_drag.getHeight() / 2;
 
                     //控件按以上规则显示
                     iv_drag.layout(left, top, right, bottom);

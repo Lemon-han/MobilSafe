@@ -129,13 +129,11 @@ public class CaheClearActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 //1.获取包管理者对象
-
                 mPm = getPackageManager();
-
                 //2.获取安装在手机上的所有的应用
                 List<PackageInfo> installedPackages = mPm.getInstalledPackages(0);
                 //3.给进度条设置最大值(手机中所有应用的总数)
-                //pb_bar.setMax(installedPackages.size());
+                pb_bar.setMax(installedPackages.size());
                 //4.遍历每一个应用,获取有缓存的应用信息(应用名称,图标,缓存大小,包名)
                 for (PackageInfo packageInfo : installedPackages) {
                     //包名作为获取缓存信息的条件
@@ -148,7 +146,7 @@ public class CaheClearActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     mIndex++;
-                    //pb_bar.setProgress(mIndex);
+                    pb_bar.setProgress(mIndex);
 
                     //每循环一次就将检测应用的名称发送给主线程显示
                     Message msg = Message.obtain();
@@ -166,8 +164,6 @@ public class CaheClearActivity extends AppCompatActivity {
                 msg.what = CHECK_FINISH;
                 mHandler.sendMessage(msg);
             }
-
-            ;
         }.start();
     }
 
@@ -189,7 +185,6 @@ public class CaheClearActivity extends AppCompatActivity {
             public void onGetStatsCompleted(PackageStats stats,
                                             boolean succeeded) {
                 //子线程中方法,用到消息机制
-
                 //4.获取指定包名的缓存大小
                 long cacheSize = stats.cacheSize;
                 //5.判断缓存大小是否大于0

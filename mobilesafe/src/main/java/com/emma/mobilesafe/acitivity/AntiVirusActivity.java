@@ -165,8 +165,6 @@ public class AntiVirusActivity extends AppCompatActivity {
                 msg.what = SCAN_FINISH;
                 mHandler.sendMessage(msg);
             }
-
-            ;
         }.start();
     }
 
